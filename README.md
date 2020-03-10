@@ -7,3 +7,12 @@ docker-compose settings for laravel
 * `composer create-project --prefer-dist laravel/laravel ./` でLaravelプロジェクト作成
 * http://localhost でアクセスしたらホーム画面が表示される
 
+DBに接続するための.env設定
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel_db
+DB_USERNAME=laravel_user
+DB_PASSWORD=password
+```
