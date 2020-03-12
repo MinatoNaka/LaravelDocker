@@ -26,3 +26,23 @@ services:
         image: redis
         ports:
             - 6379:6379
+    minio:
+        image: minio/minio
+        ports:
+            - 9000:9000
+        environment:
+            MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID}
+            MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY}
+        command: server /export
+    createbuckets: # デフォルトバケット作成用のコンテナ
+        image: minio/mc
+        depends_on:
+            - minio
+        entrypoint: >
+            /bin/sh -c "
+            /usr/bin/mc config host add minio ${AWS_URL} ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY};
+            /usr/bin/mc rm -r --force minio/${AWS_BUCKET};
+            /usr/bin/mc mb minio/${AWS_BUCKET};
+            /usr/bin/mc policy download minio/${AWS_BUCKET};
+            exit 0;
+            "

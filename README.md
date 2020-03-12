@@ -25,3 +25,39 @@ REDIS_HOST=redis
 REDIS_PASSWORD=
 REDIS_PORT=6379
 ```
+
+minioを利用するための設定
+.env
+```
+# AWS config
+AWS_URL=http://minio:9000
+AWS_ACCESS_KEY_ID=s3id
+AWS_SECRET_ACCESS_KEY=s3secret
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=laravel-bucket
+AWS_PATH_STYLE_ENDPOINT=true
+```
+
+パッケージインストール  
+`composer require league/flysystem-aws-s3-v3`
+
+config/filesystems.php
+```$xslt
+'s3' => [
+    'driver' => 's3',
+    'key' => env('AWS_ACCESS_KEY_ID'),
+    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+    'region' => env('AWS_DEFAULT_REGION'),
+    'bucket' => env('AWS_BUCKET'),
+    'url' => env('AWS_URL'),
+    'use_path_style_endpoint' => env('AWS_PATH_STYLE_ENDPOINT', false),
+    'endpoint' => env('AWS_URL'),
+],
+```
+
+tinkerでアップロード確認
+```
+$ php artisan tinker
+>>> Storage::disk('s3')->put('hello.json', '{"hello": "world"}')
+=> true
+```
