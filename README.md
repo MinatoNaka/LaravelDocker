@@ -61,3 +61,6 @@ $ php artisan tinker
 >>> Storage::disk('s3')->put('hello.json', '{"hello": "world"}')
 => true
 ```
+
+ブラウザでmino操作  
+http://localhost:9000/minio/laravel-bucket/  
