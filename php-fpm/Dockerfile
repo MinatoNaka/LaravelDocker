@@ -25,4 +25,7 @@ RUN apt-get install -y npm
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
 
+#phpredisインストール
+RUN git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis
+RUN docker-php-ext-install redis
 

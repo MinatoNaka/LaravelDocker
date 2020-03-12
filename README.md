@@ -16,3 +16,12 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=password
 ```
+
+Redisを利用するための.env設定
+```
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+REDIS_HOST=redis
+REDIS_PASSWORD=
+REDIS_PORT=6379
+```
