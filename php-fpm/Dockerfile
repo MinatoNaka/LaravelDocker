@@ -11,6 +11,7 @@ RUN docker-php-ext-install pdo_mysql
 #composerインストール
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
+RUN composer config -g repos.packagist composer https://packagist.jp
 
 #gitインストール
 RUN apt-get update
